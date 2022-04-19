@@ -6,23 +6,25 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const writeFileAsync = util.promisify(fs.writeFile);
+const employeeList = [];
+
+//const writeFileAsync = util.promisify(fs.writeFile);
 
 const addManager = () => {
     return inquirer.prompt([
         {
             type:'input',
-            name:'name',
+            name:'mName',
             message:'What is the managers name of this team?',
         },
         {
             type:'input',
-            name:'id',
+            name:'mId',
             message:'What is the managers ID?',
         },
         {
             type:'input',
-            name:'email',
+            name:'mEmail',
             message:'What is the managers email?',
         },
         {
@@ -30,10 +32,18 @@ const addManager = () => {
             name:'phoneNumber',
             message:'What is the managers office number?',
         },
-    ]);
+])
+
+.then(managerInfo => {
+    let {mName, mId, mEmail, phoneNumber} = managerInfo;
+    let manager = new Manager (mName, mId, mEmail, phoneNumber);
+
+    employeeList.push(manager);
+    })
 };
-const addWorker = () => {
-    return inquirer.prompt([
+
+const addEmployee = () => {
+    return inquirer.prompt ([
         {
             type:'list',
             name:'role',
@@ -71,5 +81,40 @@ const addWorker = () => {
             message:'Would you like to add more team members?',
             default: true,
         },
-    ]);
+    ])
+
+    .then(employeeInfo => {
+        let {name, id, email, gitHub, school, addMoreEmployees} = employeeInfo;
+        let employee;
+        console.log(employee);
+
+        if (role === 'Engineer'){
+            employee = new Engineer (name, id, gitHub, email);
+        } 
+        else if (role === 'Intern') {
+            employee = new Intern (name, id, school, email);
+        }
+        employeeList.push(employee)
+
+        if (addMoreEmployees) {
+            return addEmployee(employeeList);
+        }
+        else { 
+            return employeeList;
+        }
+    })
 };
+
+const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        else {
+            console.log('Team Profile Created!')
+        }
+    })
+};
+addManager();
+addEmployee();
