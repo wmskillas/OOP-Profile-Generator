@@ -6,6 +6,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+const generate = require('./src/generate')
 const employeeList = [];
 
 //const writeFileAsync = util.promisify(fs.writeFile);
@@ -35,8 +36,8 @@ const addManager = () => {
 ])
 
 .then(managerInfo => {
-    let {mName, mId, mEmail, phoneNumber} = managerInfo;
-    let manager = new Manager (mName, mId, mEmail, phoneNumber);
+    const {mName, mId, mEmail, phoneNumber} = managerInfo;
+    const manager = new Manager (mName, mId, mEmail, phoneNumber);
 
     employeeList.push(manager);
     })
@@ -116,5 +117,15 @@ const writeFile = data => {
         }
     })
 };
-addManager();
-addEmployee();
+
+addManager()
+.then (addEmployee)
+.then (employeeList => {
+    return generate(employeeList);
+})
+.then (htmlIndex => {
+    return writeFile(htmlIndex);
+})
+.catch(err => {
+    console.log(err)
+}) 

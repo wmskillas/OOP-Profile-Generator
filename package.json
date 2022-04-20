@@ -19,5 +19,8 @@
   "homepage": "https://github.com/wmskillas/OOP-Profile-Generator#readme",
   "dependencies": {
     "inquirer": "^8.2.2"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
   }
 }
