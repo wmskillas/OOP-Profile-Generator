@@ -107,5 +107,7 @@ const generateTeam = function (employeeCards) {
     `;
 }
 
+module.exports = generate;
+
 
 
