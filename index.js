@@ -6,7 +6,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const generate = require('./src/generate')
+const generateHtml = require('./src/generateHtml')
 const employeeList = [];
 
 //const writeFileAsync = util.promisify(fs.writeFile);
@@ -81,18 +81,19 @@ const addEmployee = () => {
             name:'addMoreEmployees',
             message:'Would you like to add more team members?',
             default: true,
-        },
+        }
     ])
 
     .then(employeeInfo => {
-        let {name, id, email, gitHub, school, addMoreEmployees} = employeeInfo;
+        let {name, id, email, gitHub, school, addMoreEmployees, role} = employeeInfo;
+
         let employee;
         console.log(employee);
 
-        if (role === "Engineer"){
+        if (role == "Engineer"){
             employee = new Engineer (name, id, email, gitHub);
         } 
-        else if (role === "Intern") {
+        else if (role == "Intern") {
             employee = new Intern (name, id, email, school);
         }
         employeeList.push(employee);
@@ -119,13 +120,14 @@ const writeFile = data => {
 };
 
 addManager()
-.then (addEmployee)
-.then (employeeList => {
-    return generate(employeeList);
-})
-.then (htmlIndex => {
-    return writeFile(htmlIndex);
-})
-.catch(err => {
-    console.log(err)
-}) 
+    .then (addEmployee)
+    
+    .then (employeeList => {
+        return generateHtml(employeeList);
+    })
+    .then (htmlIndex => {
+        return writeFile(htmlIndex);
+    })
+    .catch(err => {
+        console.log(err)
+    }) 

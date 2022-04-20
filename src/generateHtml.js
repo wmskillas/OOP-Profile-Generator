@@ -47,25 +47,25 @@ const internHtml = (intern) => {
     </div>`;
 };
 
-generate = (data) => {
+generateHtml = (data) => {
     teamData = [];
 
     for (let i = 0; i < data.length; i++) {
 
         const employee = data[i];
-        const position = employee.getRole();
+        const role = employee.getRole();
 
-        if (position === 'Manager') {
+        if (role === 'Manager') {
 
             const managerCard = generateManager(employee);
             teamData.push(managerCard);
         }
-        else if (position === 'Engineer') {
+        else if (role === 'Engineer') {
             
             const engineerCard = generateEngineer(employee);
             teamData.push(engineerCard);
         }
-        else if(position === 'Intern') {
+        else if(role === 'Intern') {
             
             const internCard = generateIntern(employee);
             teamData.push(internCard);
@@ -76,12 +76,11 @@ generate = (data) => {
     }
 
 const teamCards = teamData.join('')
-const generateTeam = generateTeamHtml(employeeCards)
-return generateTeam
-console.log(teamCards);
+const generateTeam = generateTeamHtml(employeeCards);
+return generateTeam;
 
 }
-const generateTeamHtml = (teamCards) => {
+const generateTeamHtml = function (teamCards) {
     return `
     <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +106,7 @@ const generateTeamHtml = (teamCards) => {
     `;
 }
 
-module.exports = generate;
+module.exports = generateHtml;
 
 
 
