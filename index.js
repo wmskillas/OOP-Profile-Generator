@@ -15,17 +15,17 @@ const addManager = () => {
     return inquirer.prompt([
         {
             type:'input',
-            name:'mName',
+            name:'name',
             message:'What is the managers name of this team?',
         },
         {
             type:'input',
-            name:'mId',
+            name:'id',
             message:'What is the managers ID?',
         },
         {
             type:'input',
-            name:'mEmail',
+            name:'email',
             message:'What is the managers email?',
         },
         {
@@ -36,8 +36,8 @@ const addManager = () => {
 ])
 
 .then(managerInfo => {
-    const {mName, mId, mEmail, phoneNumber} = managerInfo;
-    const manager = new Manager (mName, mId, mEmail, phoneNumber);
+    const {name, id, email, phoneNumber} = managerInfo;
+    const manager = new Manager (name, id, email, phoneNumber);
 
     employeeList.push(manager);
     })
@@ -49,7 +49,7 @@ const addEmployee = () => {
             type:'list',
             name:'role',
             message:'What is your role?',
-            choices:['Engineer', 'Intern'],
+            choices:["Engineer", "Intern"],
         },
         {
             type:'input',
@@ -89,13 +89,13 @@ const addEmployee = () => {
         let employee;
         console.log(employee);
 
-        if (role === 'Engineer'){
-            employee = new Engineer (name, id, gitHub, email);
+        if (role === "Engineer"){
+            employee = new Engineer (name, id, email, gitHub);
         } 
-        else if (role === 'Intern') {
-            employee = new Intern (name, id, school, email);
+        else if (role === "Intern") {
+            employee = new Intern (name, id, email, school);
         }
-        employeeList.push(employee)
+        employeeList.push(employee);
 
         if (addMoreEmployees) {
             return addEmployee(employeeList);

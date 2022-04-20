@@ -1,20 +1,20 @@
-const managerHtml = (manager => {
+const managerHtml = (manager) => {
     return `
     <div class='col-4 my-4'>
         <div class='card'>
             <div class='card-header bg-primary text-center'>
             <h3><strong>Team Manager</strong></h3>
-            <h2>${manager.mName}</h2>
+            <h2>${manager.name}</h2>
             </div>
             <div class='card-body bg-light'>
-            <p class='id'>ID: ${manager.mId}</p>
-            <p class='email'>Email: ${manager.mEmail}</p>
+            <p class='id'>ID: ${manager.id}</p>
+            <p class='email'>Email: ${manager.email}</p>
             <p class='phoneNumber'>Phone Number: ${manager.phoneNumber}</p>
             </div>
         </div>
     </div>`;
-})
-const engineerHtml = (engineer => {
+}
+const engineerHtml = (engineer) => {
     return `
     <div class='col-4 my-4'>
         <div class='card'>
@@ -29,8 +29,8 @@ const engineerHtml = (engineer => {
             </div>
         </div>
     </div>`;
-})
-const internHtml = (intern => {
+}
+const internHtml = (intern) => {
     return `
     <div class='col-4 my-4'>
         <div class='card'>
@@ -45,7 +45,7 @@ const internHtml = (intern => {
             </div>
         </div>
     </div>`;
-});
+};
 
 generate = (data) => {
     teamData = [];
@@ -75,13 +75,13 @@ generate = (data) => {
         }
     }
 
-const teamCards = teamData.join('');
-const generateTeam = generateTeamHtml(employeeCards);
-return generateTeam;
-console.log(generateTeam);
+const teamCards = teamData.join('')
+const generateTeam = generateTeamHtml(employeeCards)
+return generateTeam
+console.log(teamCards);
 
 }
-const generateTeam = function (employeeCards) {
+const generateTeamHtml = (teamCards) => {
     return `
     <!DOCTYPE html>
 <html lang="en">
