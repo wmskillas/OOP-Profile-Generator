@@ -1,4 +1,4 @@
-const managerHtml = (manager) => {
+const generateManager = (manager) => {
     return `
     <div class='col-4 my-4'>
         <div class='card'>
@@ -14,7 +14,7 @@ const managerHtml = (manager) => {
         </div>
     </div>`;
 }
-const engineerHtml = (engineer) => {
+const generateEngineer = (engineer) => {
     return `
     <div class='col-4 my-4'>
         <div class='card'>
@@ -30,7 +30,7 @@ const engineerHtml = (engineer) => {
         </div>
     </div>`;
 }
-const internHtml = (intern) => {
+const generateIntern = (intern) => {
     return `
     <div class='col-4 my-4'>
         <div class='card'>
@@ -39,7 +39,7 @@ const internHtml = (intern) => {
             <h2>${intern.name}</h2>
             </div>
             <div class='card-body bg-light'>
-            <p class='id'>ID: ${engineer.id}</p>
+            <p class='id'>ID: ${intern.id}</p>
             <p class='email'>Email: ${intern.email}</p>
             <p class='phoneNumber'>School: ${intern.school}</p>
             </div>
@@ -76,7 +76,7 @@ generateHtml = (data) => {
     }
 
 const teamCards = teamData.join('')
-const generateTeam = generateTeamHtml(employeeCards);
+const generateTeam = generateTeamHtml(teamCards);
 return generateTeam;
 
 }
